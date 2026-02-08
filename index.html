@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nashrah Nayab Umar — Developer & AI Enthusiast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables - Light Theme */
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #ec4899;
+            --accent: #f472b6;
+            --bg: #ffffff;
+            --bg-secondary: #fafafa;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --gradient-soft: linear-gradient(135deg, #fae8ff 0%, #fce7f3 100%);
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --bg-secondary: #1e293b;
+            --text: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            --gradient-soft: linear-gradient(135deg, #581c87 0%, #831843 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        .theme-toggle i {
+            font-size: 24px;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .moon-icon {
+            color: #fbbf24;
+            opacity: 1;
+        }
+
+        .sun-icon {
+            color: #f59e0b;
+            opacity: 0;
+            transform: rotate(180deg);
+        }
+
+        [data-theme="dark"] .moon-icon {
+            opacity: 0;
+            transform: rotate(-180deg);
+        }
+
+        [data-theme="dark"] .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .nav {
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .nav.scrolled {
+            padding: 12px 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--gradient-soft);
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 24px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .wave {
+            display: inline-block;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(20deg); }
+            75% { transform: rotate(-20deg); }
+        }
+
+        .hero-title {
+            font-size: clamp(40px, 7vw, 72px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 3vw, 28px);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .typing-container {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .typing-text {
+            font-weight: 600;
+        }
+
+        .cursor-blink {
+            margin-left: 4px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hero-socials {
+            display: flex;
+            gap: 16px;
+            animation: fadeInUp 0.8s ease 1s both;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        /* Character */
+        .hero-character {
+            position: relative;
+            animation: fadeInRight 1s ease;
+        }
+
+        .character-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .character {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(139, 92, 246, 0.2));
+        }
+
+        .head {
+            transform-origin: center;
+            animation: headBob 3s ease-in-out infinite;
+        }
+
+        @keyframes headBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .eyes {
+            animation: eyeBlink 4s infinite;
+        }
+
+        @keyframes eyeBlink {
+            0%, 45%, 55%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .arm-left, .arm-right {
+            transform-origin: center;
+            animation: typing 2s ease-in-out infinite;
+        }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .sparkles {
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .float-item {
+            position: absolute;
+            font-size: 32px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .float-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .float-2 { top: 20%; right: 10%; animation-delay: 0.5s; }
+        .float-3 { bottom: 30%; left: 5%; animation-delay: 1s; }
+        .float-4 { bottom: 20%; right: 15%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Background Blobs */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.6;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: blob 20s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            top: -10%;
+            right: 10%;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
+        }
+
+        .blob-2 {
+            bottom: 10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+            animation-delay: 2s;
+        }
+
+        .blob-3 {
+            top: 50%;
+            left: 40%;
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+            animation-delay: 4s;
+        }
+
+        @keyframes blob {
+            0%, 100% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+                transform: rotate(0deg);
+            }
+            33% {
+                border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+                transform: rotate(120deg);
+            }
+            66% {
+                border-radius: 50% 60% 30% 70% / 60% 40% 50% 30%;
+                transform: rotate(240deg);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--gradient-soft);
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .large-text {
+            font-size: 22px;
+            line-height: 1.8;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 28px 20px;
+            background: var(--gradient-soft);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .about-side {
+            position: sticky;
+            top: 100px;
+        }
+
+        .skills-card {
+            background: var(--bg-secondary);
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .skills-card h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: var(--primary);
+            transform: translateX(6px);
+        }
+
+        .skill-item i {
+            font-size: 26px;
+            color: var(--primary);
+        }
+
+        .btn-cv {
+            width: 100%;
+            padding: 18px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-cv:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 48px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gradient);
+            box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--primary);
+        }
+
+        .timeline-content {
+            background: var(--bg-secondary);
+            padding: 28px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--gradient-soft);
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .timeline-content h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-place {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            position: relative;
+            height: 220px;
+            background: var(--gradient-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-emoji {
+            font-size: 80px;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover .project-emoji {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(139, 92, 246, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 22px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .project-btn:hover {
+            transform: scale(1.15);
+        }
+
+        .project-info {
+            padding: 28px;
+        }
+
+        .project-info h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .project-info p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tags span {
+            padding: 6px 14px;
+            background: var(--gradient-soft);
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Contact */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+        }
+
+        .contact-methods {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateX(10px);
+            border-color: var(--primary);
+        }
+
+        .method-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .method-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .method-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .contact-form {
+            background: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-size: 26px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .footer-left p {
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-grid, .about-grid, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero-character { order: -1; }
+            .about-side { position: static; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 73px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 73px);
+                background: var(--bg);
+                flex-direction: column;
+                padding: 40px;
+                gap: 24px;
+                transition: left 0.3s ease;
+                border-top: 1px solid var(--border);
+            }
+            .nav-menu.active { left: 0; }
+            .hamburger { display: flex; }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+            .hero-buttons { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+            .projects-grid, .stats-grid, .skills-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            section { padding: 60px 0; }
+            .blob { width: 250px !important; height: 250px !important; }
+            .character-container { max-width: 300px; }
+            .float-item { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fas fa-moon moon-icon"></i>
+        <i class="fas fa-sun sun-icon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#home" class="nav-logo">Nashrah 💜</a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="wave">👋</span> Hi there, I'm
+                    </div>
+                    <h1 class="hero-title">Nashrah Nayab Umar</h1>
+                    <div class="hero-subtitle">
+                        <span>I'm a </span>
+                        <span class="gradient-text typing-container">
+                            <span class="typing-text" id="typingText"></span>
+                            <span class="cursor-blink">|</span>
+                        </span>
+                    </div>
+                    <p class="hero-description">
+                        Computer Science student at FAST-NUCES, passionate about building creative solutions through code. From games to AI, I love bringing ideas to life! ✨
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <span>View My Work</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            <span>Let's Connect</span>
+                            <i class="fas fa-heart"></i>
+                        </a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://github.com/Nashrah-01" target="_blank" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:nayyab7cs@gmail.com" class="social-link" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                <!-- 3D Character -->
+                <div class="hero-character">
+                    <div class="character-container">
+                        <svg class="character" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="200" cy="200" r="180" fill="url(#grad1)" opacity="0.2"/>
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffd6ba;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffb896;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <ellipse cx="200" cy="320" rx="70" ry="90" fill="#8b5cf6" class="body"/>
+                            <ellipse cx="145" cy="310" rx="25" ry="70" fill="#7c3aed" class="arm-left" transform="rotate(-20 145 310)"/>
+                            <ellipse cx="255" cy="310" rx="25" ry="70" fill="#7c3aed" class="arm-right" transform="rotate(20 255 310)"/>
+                            <rect x="150" y="340" width="100" height="60" rx="5" fill="#1f2937" class="laptop"/>
+                            <rect x="155" y="345" width="90" height="50" rx="2" fill="#10b981" opacity="0.8" class="laptop-screen"/>
+                            <line x1="160" y1="355" x2="240" y2="355" stroke="#22c55e" stroke-width="1" opacity="0.6"/>
+                            <line x1="160" y1="365" x2="230" y2="365" stroke="#22c55e" stroke-width="1" opacity="0.6"/>
+                            <line x1="160" y1="375" x2="235" y2="375" stroke="#22c55e" stroke-width="1" opacity="0.6"/>
+                            <circle cx="200" cy="150" r="75" fill="url(#skinGrad)" class="head"/>
+                            <ellipse cx="200" cy="120" rx="80" ry="60" fill="#1f2937" class="hair"/>
+                            <ellipse cx="150" cy="130" rx="30" ry="50" fill="#1f2937" class="hair-left"/>
+                            <ellipse cx="250" cy="130" rx="30" ry="50" fill="#1f2937" class="hair-right"/>
+                            <path d="M 140 120 Q 200 140 260 120 L 260 130 Q 200 150 140 130 Z" fill="#1f2937"/>
+                            <g class="eyes">
+                                <ellipse cx="175" cy="150" rx="8" ry="12" fill="#1f2937" class="eye-left"/>
+                                <ellipse cx="225" cy="150" rx="8" ry="12" fill="#1f2937" class="eye-right"/>
+                                <circle cx="177" cy="148" r="3" fill="#ffffff" class="eye-shine-left"/>
+                                <circle cx="227" cy="148" r="3" fill="#ffffff" class="eye-shine-right"/>
+                            </g>
+                            <ellipse cx="155" cy="165" rx="15" ry="10" fill="#ff9999" opacity="0.4"/>
+                            <ellipse cx="245" cy="165" rx="15" ry="10" fill="#ff9999" opacity="0.4"/>
+                            <path d="M 180 175 Q 200 185 220 175" stroke="#ff6b9d" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            <rect x="120" y="135" width="15" height="35" rx="7" fill="#8b5cf6" class="headphone-left"/>
+                            <rect x="265" y="135" width="15" height="35" rx="7" fill="#8b5cf6" class="headphone-right"/>
+                            <path d="M 135 135 Q 200 110 265 135" stroke="#8b5cf6" stroke-width="8" fill="none" class="headphone-band"/>
+                            <g class="sparkles">
+                                <path d="M 100 100 L 105 105 L 100 110 L 95 105 Z" fill="#fbbf24" class="sparkle-1"/>
+                                <path d="M 300 120 L 304 124 L 300 128 L 296 124 Z" fill="#ec4899" class="sparkle-2"/>
+                                <path d="M 280 80 L 283 83 L 280 86 L 277 83 Z" fill="#8b5cf6" class="sparkle-3"/>
+                            </g>
+                        </svg>
+                        <div class="floating-elements">
+                            <div class="float-item float-1">💻</div>
+                            <div class="float-item float-2">🎨</div>
+                            <div class="float-item float-3">🚀</div>
+                            <div class="float-item float-4">⭐</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">✨ Get to know me</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-content">
+                    <p class="large-text">
+                        Hey! I'm Nashrah, a Computer Science student at <span class="highlight">FAST-NUCES, Lahore</span>. I love creating things that live on the internet! 💜
+                    </p>
+                    <p>
+                        My coding journey has been super exciting! From building classic games with SFML to developing management systems with C#, and diving into the amazing world of AI and computer vision with Python - every project teaches me something new.
+                    </p>
+                    <p>
+                        When I'm not coding, you'll find me organizing programming competitions at SOFTEC or participating in hackathons. I believe in learning by doing and sharing knowledge with the community! ✨
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">💻</div>
+                            <div class="stat-number">6+</div>
+                            <div class="stat-label">Technologies</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">🎓</div>
+                            <div class="stat-number">2023</div>
+                            <div class="stat-label">Graduation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-side">
+                    <div class="skills-card">
+                        <h3>💫 Technologies I Love</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fab fa-python"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-code"></i>
+                                <span>C++</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-hashtag"></i>
+                                <span>C#</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-js"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-gamepad"></i>
+                                <span>SFML</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-brain"></i>
+                                <span>OpenCV</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-git-alt"></i>
+                                <span>Git</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-database"></i>
+                                <span>SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-cv" onclick="downloadCV()">
+                        <i class="fas fa-download"></i>
+                        <span>Download My Resume</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">📚 My Journey</span>
+                <h2 class="section-title">Education & Experience</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2023 - Present</span>
+                        <h3>BSc Computer Science</h3>
+                        <p class="timeline-place">🎓 FAST-NUCES, Lahore</p>
+                        <p>Pursuing undergraduate degree with focus on AI, software development, and problem-solving</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2023 - Present</span>
+                        <h3>Programming Competition Officer</h3>
+                        <p class="timeline-place">🏆 SOFTEC, FAST-NUCES</p>
+                        <p>Organizing programming competitions at Pakistan's premier technology festival</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2020 - 2022</span>
+                        <h3>Intermediate (ICS - Physics)</h3>
+                        <p class="timeline-place">📖 Lahore College for Women Universities</p>
+                        <p>Completed with focus on Computer Science and Physics</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2023</span>
+                        <h3>Matriculation</h3>
+                        <p class="timeline-place">💡 Govt. Islamia Girls High School</p>
+                        <p>Participated in enthusiastically in extra curriculum activities and secured top positions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">💼 My Work</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-emoji">💝</div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Nashrah-01" target="_blank" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Zakat Management System</h3>
+                        <p>Comprehensive charity distribution platform with automated workflows and data management</p>
+                        <div class="project-tags">
+                            <span>C#</span>
+                            <span>Windows Forms</span>
+                            <span>Database</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-emoji">🎨</div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Nashrah-01" target="_blank" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Pseudo Colorization</h3>
+                        <p>AI-powered image colorization using OpenCV and advanced algorithms</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>OpenCV</span>
+                            <span>AI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-emoji">🐍</div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Nashrah-01" target="_blank" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Snake Game</h3>
+                        <p>Classic game with smooth animations and optimized game loop</p>
+                        <div class="project-tags">
+                            <span>C++</span>
+                            <span>SFML</span>
+                            <span>Game Dev</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-emoji">🎮</div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Nashrah-01" target="_blank" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Tetris Game</h3>
+                        <p>Full-featured Tetris with piece rotation and progressive difficulty</p>
+                        <div class="project-tags">
+                            <span>C++</span>
+                            <span>SFML</span>
+                            <span>Game Logic</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-emoji">📝</div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Nashrah-01" target="_blank" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Online Exam System</h3>
+                        <p>Automated examination platform with grading and analytics</p>
+                        <div class="project-tags">
+                            <span>C++</span>
+                            <span>SFML</span>
+                            <span>Database</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-emoji">📞</div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Nashrah-01" target="_blank" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Phone Book Management</h3>
+                        <p>Contact management with efficient search algorithms</p>
+                        <div class="project-tags">
+                            <span>C++</span>
+                            <span>Data Structures</span>
+                            <span>Algorithms</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-emoji">🎯</div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Nashrah-01" target="_blank" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Hangman Game</h3>
+                        <p>Interactive word game with visual feedback and difficulty levels</p>
+                        <div class="project-tags">
+                            <span>C++</span>
+                            <span>SFML</span>
+                            <span>Game Dev</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-emoji">🔤</div>
+                        <div class="project-overlay">
+                            <a href="https://github.com/Nashrah-01" target="_blank" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>CatchAlphabets Game</h3>
+                        <p>Assembly game with interrupt-based mechanics and timing</p>
+                        <div class="project-tags">
+                            <span>Assembly</span>
+                            <span>DOS/BIOS</span>
+                            <span>Low-Level</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">💌 Let's Connect</span>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-text">
+                    <p class="large-text">
+                        I'm always excited to connect with fellow developers and tech enthusiasts! 💜
+                    </p>
+                    <p>
+                        Whether you want to collaborate on a project, discuss technology, or just say hi - my inbox is always open. Let's create something amazing together!
+                    </p>
+                    <div class="contact-methods">
+                        <a href="mailto:nayyab7cs@gmail.com" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="method-label">Email</div>
+                                <div class="method-value">nayyab7cs@gmail.com</div>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Nashrah-01" target="_blank" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div>
+                                <div class="method-label">GitHub</div>
+                                <div class="method-value">@Nashrah-01</div>
+                            </div>
+                        </a>
+                        <a href="tel:+923284162991" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="method-label">Phone</div>
+                                <div class="method-value">+92 328 4162991</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">Nashrah Nayab Umar</div>
+                    <p>Building the future, one line of code at a time 💜✨</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Nashrah-01" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:nayyab7cs@gmail.com" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Nashrah Nayab Umar</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== THEME TOGGLE - GUARANTEED TO WORK ==========
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('portfolio-theme', newTheme);
+            console.log('🎨 Theme changed to:', newTheme);
+            alert('Theme changed to ' + newTheme + ' mode!');
+        }
+
+        // Load saved theme on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            console.log('✨ Portfolio loaded with theme:', savedTheme);
+        });
+
+        // ========== DOWNLOAD CV - GUARANTEED TO WORK ==========
+        function downloadCV() {
+            const cvContent = `NASHRAH NAYAB UMAR
+Computer Science Student | Developer | AI Enthusiast
+================================================================
+
+CONTACT INFORMATION
+================================================================
+Email: nayyab7cs@gmail.com
+Phone: +92 328 4162991
+GitHub: github.com/Nashrah-01
+Location: Lahore, Pakistan
+
+================================================================
+PROFESSIONAL SUMMARY
+================================================================
+Passionate Computer Science undergraduate at FAST-NUCES with 
+expertise in game development, system design, and AI applications.
+Strong problem-solving skills combined with creative coding abilities.
+
+================================================================
+EDUCATION
+================================================================
+
+Bachelor of Science in Computer Science
+FAST-NUCES, Lahore | 2023 - 2027 (Expected)
+• Focus on AI, Software Development, Problem Solving
+• Relevant Coursework: AI & ML, Computer Vision, OOP, Game Dev
+
+Intermediate in Computer Science (ICS - Physics)
+Punjab College for Women Scientists | 2020 - 2022
+
+================================================================
+TECHNICAL SKILLS
+================================================================
+
+Programming Languages:
+• Python (Advanced)      • C++ (Advanced)
+• C# (Intermediate)      • JavaScript (Intermediate)
+• HTML/CSS              • Assembly (Beginner)
+
+Technologies & Frameworks:
+• SFML (Game Development)   • OpenCV (Computer Vision)
+• Git/GitHub                • SQL (Database Management)
+• Windows Forms
+
+Core Competencies:
+• Object-Oriented Programming (OOP)
+• Data Structures & Algorithms
+• Game Development & Design
+• Computer Vision & Image Processing
+• System Design & Architecture
+
+================================================================
+PROJECTS
+================================================================
+
+1. Zakat Management System (C#, Windows Forms, Database)
+2. Pseudo Colorization (Python, OpenCV, Computer Vision)
+3. Snake Game (C++, SFML)
+4. Tetris Game (C++, SFML)
+5. Online Exam System (C++, SFML, Database)
+6. Phone Book Management (C++, Data Structures)
+7. Hangman Game (C++, SFML)
+8. CatchAlphabets Game (Assembly, DOS/BIOS)
+
+================================================================
+EXPERIENCE
+================================================================
+
+Programming Competition Officer
+SOFTEC, FAST-NUCES | 2023 - Present
+
+Hackathon Participant
+University of Lahore | 2023
+
+================================================================
+
+© 2026 Nashrah Nayab Umar
+================================================================`;
+
+            try {
+                const blob = new Blob([cvContent], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Nashrah_Nayab_Umar_Resume.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('✅ Resume downloaded successfully! Check your downloads folder.');
+                console.log('📥 CV Downloaded successfully!');
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Download failed. Please try again.');
+            }
+        }
+
+        // ========== MOBILE MENU ==========
+        function toggleMenu() {
+            document.getElementById('hamburger').classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('hamburger').classList.remove('active');
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+
+        // ========== TYPING ANIMATION ==========
+        const words = ['Game Developer 🎮', 'AI Enthusiast 🤖', 'Problem Solver 🧩', 'Creative Coder 💻', 'Tech Explorer 🚀'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const typingText = document.getElementById('typingText');
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let typeSpeed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+            
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        setTimeout(typeEffect, 1000);
+
+        // ========== NAVBAR SCROLL ==========
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ========== CONTACT FORM ==========
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            alert(`Thanks for reaching out, ${name}! I'll get back to you at ${email} soon! 💌`);
+            event.target.reset();
+        }
+
+        // ========== CONSOLE MESSAGE ==========
+        console.log('%c👋 Hey there, fellow developer!', 'color: #8b5cf6; font-size: 24px; font-weight: bold;');
+        console.log('%c💜 Thanks for checking out my portfolio!', 'color: #ec4899; font-size: 16px;');
+        console.log('%cBuilt with love by Nashrah Nayab Umar ✨', 'color: #6b7280; font-size: 14px;');
+    </script>
+</body>
+</html>

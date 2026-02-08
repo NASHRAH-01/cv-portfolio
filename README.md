@@ -9,10 +9,11 @@ The website presents my personal information, education, skills, projects, and c
 **Institution:** FAST-NUCES, Lahore  
 
 ## Live Website
-https://your-vercel-link.vercel.app
+https://cv-portfolio-dun.vercel.app/
+
 
 ## GitHub Repository
-https://github.com/YOUR_USERNAME/portfolio
+https://github.com/NASHRAH-01/cv-portfolio.git
 
 ## Features
 - Responsive design for mobile and desktop
